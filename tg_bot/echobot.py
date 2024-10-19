@@ -20,7 +20,7 @@ import logging
 from telegram import ForceReply, Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
-import settings
+from tg_bot import settings
 
 # Enable logging
 logging.basicConfig(
