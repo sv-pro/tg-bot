@@ -18,7 +18,7 @@ if __name__ == "__main__":
     def default_callback(message: str) -> str:
         return message
 
-    app = App(start_callback)
+    app = App(start_callback=start_callback)
     app.set_default_command_handler(default_callback)
     app.set_default_message_handler(default_callback)
 

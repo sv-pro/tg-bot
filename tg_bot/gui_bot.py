@@ -39,10 +39,10 @@ def main() -> None:
     app = Application.builder().token(BOT_TOKEN).build()
 
     # Add the command handlers
-    app.add_handler(CommandHandler("start", start))
+    app.add_command_handler(CommandHandler("start", start))
     # app.add_handler(CallbackQueryHandler(get_username))
     # Message handler with a regex pattern
-    app.add_handler(MessageHandler(filters.Regex("Get username"), get_username))
+    app.add_command_handler(MessageHandler(filters.Regex("Get username"), get_username))
 
     # Start the Application
     app.run_polling(allowed_updates=Update.ALL_TYPES)

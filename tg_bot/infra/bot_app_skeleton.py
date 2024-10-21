@@ -26,7 +26,7 @@ def main(handlers: List[BaseHandler]) -> None:
     # Create the Application and pass it your bot's token.
     application = Application.builder().token(BOT_TOKEN).build()
 
-    [application.add_handler(handler) for handler in handlers]
+    [application.add_command_handler(handler) for handler in handlers]
 
     application.run_polling(allowed_updates=Update.ALL_TYPES)
 

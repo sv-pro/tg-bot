@@ -78,9 +78,9 @@ def main() -> None:
     application = Application.builder().token(BOT_TOKEN).build()
 
     # application.add_handler(CommandHandler(["start", "help"], start))
-    application.add_handler(CommandHandler("start", start))
-    application.add_handler(CommandHandler("set", set_timer))
-    application.add_handler(CommandHandler("unset", unset))
+    application.add_command_handler(CommandHandler("start", start))
+    application.add_command_handler(CommandHandler("set", set_timer))
+    application.add_command_handler(CommandHandler("unset", unset))
 
     # Run the bot until the user presses Ctrl-C
     # application.run_polling(allowed_updates=Update.ALL_TYPES)
