@@ -1,7 +1,8 @@
 # framework code
 ## the framework is responsible for abstracting the telegram bot api
 ## it handles all the telegram specific details: classes, methods, async handling, etc
-from tg_bot.infra.app import App
+
+from tg_bot.infra.app import App, logger
 
 #####################################################################################
 if __name__ == "__main__":
@@ -20,15 +21,29 @@ if __name__ == "__main__":
     def default_cmd_callback(cmd: str) -> str:
         return cmd
 
-    def delayed_callback(message: str, *args, **kwargs) -> str:
-        import time
-        time.sleep(5)
-        return message
 
     app = App(start_callback=start_callback)
+
+    @app.command_handler("delay")
+    def delayed_callback(command: str, command_tail: str) -> str:
+        import time
+        # except Exception as e:
+
+        t = 5
+
+        if command_tail:
+            try:
+                t = int(command_tail[0])
+            except Exception as e:
+                logger.error(f"Error parsing delay time: {e}")
+
+        time.sleep(t)
+        msg = f"Delayed response after {t} seconds"
+        return msg
+
     # app.set_default_command_handler(default_cmd_callback)
     app.set_default_message_handler(default_msg_callback)
-    app.add_command_handler("delay", delayed_callback)
+    # app.add_command_handler("delay", delayed_callback)
 
     ## start the app
     app.run()
